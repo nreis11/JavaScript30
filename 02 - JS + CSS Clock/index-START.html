@@ -43,7 +43,7 @@
     }
 
     .clock {
-      width: 30rem;
+      width: 0rem;
       height: 30rem;
       border:20px solid white;
       border-radius:50%;
@@ -58,6 +58,12 @@
       background-image: url("images/clock-face.jpg");
       background-size: cover;
       border: 5px solid black;
+      -webkit-transition: width 2s; /* Safari */
+      transition: width 2s;
+    }
+
+    .clock:hover {
+        width: 30rem;
     }
 
     .clock-face {
@@ -120,6 +126,15 @@ function setDate () {
 }
 
 setInterval(setDate, 1000);
+
+// Add a function that starts the .clock at a width of 0rem and ends at 30rem
+const clock = document.querySelector(".clock")
+
+function stretchClock () {
+    clock.style.width = "30rem";
+}
+
+// stretchClock();
 
   </script>
 </body>
