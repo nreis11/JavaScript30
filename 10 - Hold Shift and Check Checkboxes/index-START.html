@@ -104,6 +104,27 @@
   </div>
 
 <script>
+
+const items = document.querySelectorAll('.item');
+const checkboxes = Array.from(document.querySelectorAll('.item > input'));
+console.log(checkboxes)
+const begIndex = -1;
+
+function addCheck(e) {
+  console.log(e);
+  // If initial click, log index
+  if (!e.shiftKey) {
+    const idx = checkboxes.indexOf(this)
+    console.log(idx)
+  }
+// checkboxes.forEach(function(checkbox) {
+//   checkbox.checked = true;
+  // console.log(checkbox)
+  // });
+}
+
+checkboxes.forEach(item => item.addEventListener('click', addCheck))
+
 </script>
 </body>
 </html>
