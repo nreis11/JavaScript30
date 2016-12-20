@@ -106,26 +106,24 @@
 <script>
 
 const items = document.querySelectorAll('.item');
+
 const checkboxes = Array.from(document.querySelectorAll('.item > input'));
-// console.log(checkboxes)
+
 let begIndex = -1;
 
 function findIndex(e) {
   // If initial click, log index
-  console.log(e)
   if (!e.shiftKey && this.checked) {
     let idx = checkboxes.indexOf(this)
-    console.log(idx)
     begIndex = idx;
-  } else if (e.shiftKey) { // Shift clicked
+  } else if (e.shiftKey && this.checked) { // Shift clicked
     let endIndex = checkboxes.indexOf(this);
     const indexes = [begIndex, endIndex]
     // Get min and max inidces
     begIndex = Math.min.apply(null, indexes)
     endIndex = Math.max.apply(null, indexes)
     const checked = checkboxes.slice(begIndex, endIndex);
-    checked.forEach(checkbox => addCheck(checkbox))
-    ;
+    checked.forEach(checkbox => addCheck(checkbox));
   }
 }
 
