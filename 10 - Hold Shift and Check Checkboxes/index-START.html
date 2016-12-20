@@ -107,23 +107,33 @@
 
 const items = document.querySelectorAll('.item');
 const checkboxes = Array.from(document.querySelectorAll('.item > input'));
-console.log(checkboxes)
-const begIndex = -1;
+// console.log(checkboxes)
+let begIndex = -1;
 
-function addCheck(e) {
-  console.log(e);
+function findIndex(e) {
   // If initial click, log index
-  if (!e.shiftKey) {
-    const idx = checkboxes.indexOf(this)
+  console.log(e)
+  if (!e.shiftKey && this.checked) {
+    let idx = checkboxes.indexOf(this)
     console.log(idx)
+    begIndex = idx;
+  } else if (e.shiftKey) { // Shift clicked
+    let endIndex = checkboxes.indexOf(this);
+    const indexes = [begIndex, endIndex]
+    // Get min and max inidces
+    begIndex = Math.min.apply(null, indexes)
+    endIndex = Math.max.apply(null, indexes)
+    const checked = checkboxes.slice(begIndex, endIndex);
+    checked.forEach(checkbox => addCheck(checkbox))
+    ;
   }
-// checkboxes.forEach(function(checkbox) {
-//   checkbox.checked = true;
-  // console.log(checkbox)
-  // });
 }
 
-checkboxes.forEach(item => item.addEventListener('click', addCheck))
+function addCheck(checkbox) {
+  checkbox.checked = true;
+}
+
+checkboxes.forEach(item => item.addEventListener('click', findIndex))
 
 </script>
 </body>
