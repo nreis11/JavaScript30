@@ -109,7 +109,7 @@ const checkboxes = Array.from(document.querySelectorAll('.item > input'));
 let begIndex = -1;
 
 function findIndex(e) {
-  // If initial click, log index
+  // If initial click and it's marked, log index
   if (!e.shiftKey && this.checked) {
     let idx = checkboxes.indexOf(this)
     begIndex = idx;
