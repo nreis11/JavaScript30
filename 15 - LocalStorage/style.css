@@ -67,7 +67,7 @@
       content: '🌮';
     }
 
-    .add-items {
+    .add-items, .misc-buttons {
       margin-top: 20px;
     }
 
