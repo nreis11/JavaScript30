@@ -36,34 +36,44 @@
     // console.log(e);
     e.preventDefault();
     const text = (this.querySelector("[name=item]")).value;
-    console.log(text);
 
     const item = {
       text: text,
       done: false
     }
-    // Reset the form
-    this.reset();
     items.push(item);
     // Save the items array to localStorage for use later
     // Need to use JSON stringify method to store
     // LocalStorage can only store STRINGS
     localStorage.setItem("items", JSON.stringify(items));
     populateList(items, itemsList);
+    // Reset the form
+    this.reset();
   }
 
   function populateList(items = [], itemsList) {
     itemsList.innerHTML = items.map((item, i) => {
       return `
         <li>
-          <input type="checkbox" data-index="${i}" id="item${i}" ${item.done ? 'checked' : ''}</input>
+          <input type="checkbox" data-index="${i}" id="item${i}" ${item.done ? 'checked' : ''}/>
           <label for="item${i}">${item.text}</label>
         </li>
       `
     }).join('');
   }
 
+  function toggleDone(e) {
+    if(!e.target.matches('input')) return; // Skip unless it's an input
+    console.log(e.target);
+    const index = e.target.dataset.index;
+    console.log(index);
+    items[index].done = !items[index].done;
+    localStorage.setItem("items", JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
   addItems.addEventListener("submit", addItem);
+  itemsList.addEventListener('click', toggleDone);
 
   populateList(items, itemsList);
 
