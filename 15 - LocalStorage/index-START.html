@@ -39,6 +39,8 @@
 
   // Action buttons
   const clearBtn = document.querySelector("#clear-btn");
+  const checkAllBtn = document.querySelector("#check-all-btn");
+  const uncheckAllBtn = document.querySelector("#uncheck-all-btn");
 
   function addItem(e) {
     // console.log(e);
@@ -86,11 +88,25 @@
     populateList(items, itemsList);
   }
 
+  function checkAll() {
+    items.forEach(item => item.done = true);
+    localStorage.setItem("items", JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  function uncheckAll() {
+    items.forEach(item => item.done = false)
+    localStorage.setItem("items", JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
   addItems.addEventListener("submit", addItem);
   itemsList.addEventListener('click', toggleDone);
 
   // Buttons
   clearBtn.addEventListener("click", clearList);
+  checkAllBtn.addEventListener("click", checkAll);
+  uncheckAllBtn.addEventListener("click", uncheckAll);
 
   populateList(items, itemsList);
 
