@@ -24,9 +24,9 @@
       <input type="submit" value="+ Add Item">
     </form>
     <div class="misc-buttons">
-      <button name="Clear">Clear List</button>
-      <button name="Select All">Check All</button>
-      <button name="Select All">Uncheck All</button>
+      <button id="clear-btn" name="Clear">Clear List</button>
+      <button id="check-all-btn" name="Select All">Check All</button>
+      <button id="uncheck-all-btn" name="Select All">Uncheck All</button>
     </div>
   </div>
 
@@ -36,6 +36,9 @@
   // If there is an items key present in localstorage, use that. Otherwise,
   // start with an empty array
   const items = JSON.parse(localStorage["items"]) || [];
+
+  // Action buttons
+  const clearBtn = document.querySelector("#clear-btn");
 
   function addItem(e) {
     // console.log(e);
@@ -77,8 +80,17 @@
     populateList(items, itemsList);
   }
 
+  function clearList() {
+    items.length = 0;
+    localStorage.setItem("items", JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
   addItems.addEventListener("submit", addItem);
   itemsList.addEventListener('click', toggleDone);
+
+  // Buttons
+  clearBtn.addEventListener("click", clearList);
 
   populateList(items, itemsList);
 
