@@ -67,7 +67,7 @@
       content: '🌮';
     }
 
-    .add-items, .misc-buttons {
+    .add-items {
       margin-top: 20px;
     }
 
@@ -75,4 +75,20 @@
       padding:10px;
       outline:0;
       border:1px solid rgba(0,0,0,0.1);
+    }
+
+    .misc-buttons > button {
+      margin-top: 15px;
+      padding: 5px;
+      background-color: white;
+      color: grey;
+      border: 2px solid grey;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      border-radius: 10%;
+    }
+
+    .misc-buttons > button:hover {
+      background-color: grey;
+      color: white;
     }
