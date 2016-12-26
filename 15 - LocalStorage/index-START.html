@@ -74,9 +74,10 @@
 
   function toggleDone(e) {
     if(!e.target.matches('input')) return; // Skip unless it's an input
-    console.log(e.target);
+    // console.log(e.target);
     const index = e.target.dataset.index;
-    console.log(index);
+    // console.log(index);
+    // Set to opposite of current status
     items[index].done = !items[index].done;
     localStorage.setItem("items", JSON.stringify(items));
     populateList(items, itemsList);
@@ -84,18 +85,20 @@
 
   function clearList() {
     items.length = 0;
-    localStorage.setItem("items", JSON.stringify(items));
-    populateList(items, itemsList);
+    updateList();
   }
 
   function checkAll() {
     items.forEach(item => item.done = true);
-    localStorage.setItem("items", JSON.stringify(items));
-    populateList(items, itemsList);
+    updateList();
   }
 
   function uncheckAll() {
     items.forEach(item => item.done = false)
+    updateList();
+  }
+
+  function updateList() {
     localStorage.setItem("items", JSON.stringify(items));
     populateList(items, itemsList);
   }
