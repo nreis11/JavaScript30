@@ -20,17 +20,28 @@
       list-style: inside square;
       font-size: 20px;
       background: white;
-      width: 500px;
+      width: 350px;
       margin: auto;
       padding: 0;
+      border: 2px solid grey;
       box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
     }
     #bands li {
       border-bottom: 1px solid #efefef;
-      padding: 20px;
+      padding: 10px;
+      background: white;
+      transition: all 0.3s;
+    }
+
+    #bands li:nth-child(odd) {
+      background: lightgrey;
     }
     #bands li:last-child {
       border-bottom: 0;
+    }
+
+    #bands li:hover {
+      transform: scale(1.05, 1.05);
     }
 
     a {
