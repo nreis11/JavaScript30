@@ -62,9 +62,8 @@ const grantAccess = function() {
 
 const changeTitle = function(title) {
   title = title.split('change the title to');
-  let lastIdx = title.length - 1;
-  title = title[lastIdx]
-  console.log(title);
+  // Take the last index
+  title = title.splice(-1, 1);
   myTitle.textContent = title;
 };
 
