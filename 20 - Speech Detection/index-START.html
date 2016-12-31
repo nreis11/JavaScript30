@@ -6,6 +6,10 @@
 </head>
 <body>
 
+  <header>
+    <h1>My Website</h1>
+  </header>
+
   <div class="words" contenteditable>
   </div>
 
@@ -18,6 +22,7 @@ recognition.interimResults = true;
 
 let p = document.createElement('p');
 const words = document.querySelector(".words");
+const myTitle = document.querySelector('h1');
 words.appendChild(p);
 
 recognition.addEventListener("result", e => {
@@ -25,7 +30,7 @@ recognition.addEventListener("result", e => {
   const transcript = Array.from(e.results)
     .map(result => result[0])
     .map(result => result.transcript).join('')
-    console.log(transcript);
+    // console.log(transcript);
     p.textContent = transcript;
     if(e.results[0].isFinal) {
       p = document.createElement('p')
@@ -39,6 +44,10 @@ recognition.addEventListener("result", e => {
     if(transcript.includes("secret password")) {
       grantAccess();
     }
+
+    if(transcript.includes("change the title to")) {
+      changeTitle(transcript);
+    }
 });
 
 const clearPage = function () {
@@ -49,6 +58,14 @@ const grantAccess = function() {
   clearPage();
   p.textContent = "Access granted!"
   words.appendChild(p);
+};
+
+const changeTitle = function(title) {
+  title = title.split('change the title to');
+  let lastIdx = title.length - 1;
+  title = title[lastIdx]
+  console.log(title);
+  myTitle.textContent = title;
 };
 
 recognition.addEventListener("end", recognition.start);
@@ -63,6 +80,14 @@ recognition.start();
       font-size: 10px;
     }
 
+    header {
+      text-align: center;
+      background-color: lightgreen;
+      border-radius: 25px;
+      padding: 2px;
+      border: 2px solid black;
+    }
+    
     body {
       background:#ffc600;
       font-family: 'helvetica neue';
