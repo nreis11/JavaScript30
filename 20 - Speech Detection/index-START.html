@@ -7,7 +7,7 @@
 <body>
 
   <header>
-    <h1>My Website</h1>
+    <h1>Title</h1>
   </header>
 
   <div class="words" contenteditable>
@@ -38,7 +38,7 @@ recognition.addEventListener("result", e => {
       words.appendChild(p);
     }
 
-    if(transcript.includes("clear the page")) {
+    if(transcript.includes("clear the page") || transcript.includes("clear the log")) {
       clearPage();
     }
 
@@ -61,7 +61,6 @@ const parseCommand = function(command, transcript) {
   transcript = transcript.split(command)
     .splice(-1, 1)
     .join('');
-  // console.log(transcript);
   return transcript;
 };
 
@@ -102,10 +101,12 @@ recognition.start();
 
     header {
       text-align: center;
-      background-color: lightgreen;
       border-radius: 25px;
       padding: 2px;
       border: 2px solid black;
+      background: orange; /* For browsers that do not support gradients */
+      background: linear-gradient(to bottom right, orange, yellow); /* Standard syntax */
+      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
     }
     
     body {
