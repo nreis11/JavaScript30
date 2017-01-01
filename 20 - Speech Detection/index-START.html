@@ -23,6 +23,7 @@ recognition.interimResults = true;
 let p = document.createElement('p');
 const words = document.querySelector(".words");
 const myTitle = document.querySelector('h1');
+const body = document.querySelector("body");
 words.appendChild(p);
 
 recognition.addEventListener("result", e => {
@@ -46,9 +47,23 @@ recognition.addEventListener("result", e => {
     }
 
     if(transcript.includes("change the title to")) {
-      changeTitle(transcript);
+      answer = parseCommand("change the title to", transcript);
+      changeTitle(answer);
+    }
+
+    if(transcript.includes("background color to")) {
+      answer = parseCommand("background color to", transcript);
+      changeBackground(answer);
     }
 });
+
+const parseCommand = function(command, transcript) {
+  transcript = transcript.split(command)
+    .splice(-1, 1)
+    .join('');
+  // console.log(transcript);
+  return transcript;
+};
 
 const clearPage = function () {
   words.innerHTML = '';
@@ -61,10 +76,16 @@ const grantAccess = function() {
 };
 
 const changeTitle = function(title) {
-  title = title.split('change the title to');
+  title = title.split('change the title to')
   // Take the last index
-  title = title.splice(-1, 1);
+        .splice(-1, 1);
   myTitle.textContent = title;
+};
+
+const changeBackground = function(color) {
+  // Remove spaces for compound colors e.g lightblue
+  color = color.replace(/\s+/g, '');
+  body.style.background = color;
 };
 
 recognition.addEventListener("end", recognition.start);
