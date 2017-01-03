@@ -33,10 +33,10 @@ recognition.addEventListener("result", e => {
     .map(result => result.transcript).join('')
     // console.log(transcript);
     p.textContent = transcript;
-    if(e.results[0].isFinal) {
-      p = document.createElement('p')
-      words.appendChild(p);
-    }
+    // if(e.results[0].isFinal) {
+    //   p = document.createElement('p')
+    //   words.appendChild(p);
+    // }
 
     if(transcript.includes("clear the page") || transcript.includes("clear the log")) {
       clearPage();
@@ -107,6 +107,7 @@ recognition.start();
       background: orange; /* For browsers that do not support gradients */
       background: linear-gradient(to bottom right, orange, yellow); /* Standard syntax */
       box-shadow:10px 10px 0 rgba(0,0,0,0.1);
+      text-transform: capitalize;
     }
     
     body {
