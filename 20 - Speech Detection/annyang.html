@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+
+
+  
+  <title></title>
+  
+</head>
+<body>
+
+<script>
+
+  const body = document.querySelector("body"); 
+
+
+  if (annyang) {
+  // Let's define our first command. First the text we expect, and then the function it should call
+  var commands = {
+    "open the pod bay doors": function() {
+      console.log("I can't do that John");
+    },
+    "change the background color to *color": function(color) {
+      body.style.background = color;
+    }
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.start();
+}
+
+  </script>
+
+  <style>
+    body {
+      background: yellow;
+    }
+  </style>
+</body>
+</html>
