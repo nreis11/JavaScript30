@@ -22,6 +22,7 @@
       console.log("I can't do that John");
     },
     "change the background color to *color": function(color) {
+      color = color.replace(/\s+/g, '');
       body.style.background = color;
     }
   };
