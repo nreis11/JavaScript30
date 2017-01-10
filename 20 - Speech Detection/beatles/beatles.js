@@ -1,12 +1,36 @@
 $(document).ready(function() {
-  console.log("ran");
+  
 });
 
-const positions = {
-  "one": {top: 0, right: 385, bottom: 381, left: 0},
-  "two": {top: 0, right: 827, bottom: 381, left: 385},
-  "three": {top: 382, right: 385, bottom: 762, left: 0},
-  "four": {top: 382, right: 800, bottom: 762, left: 385}
+
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+// Live visual feedback to show what you are speaking
+recognition.interimResults = true;
+
+const speechTranscript = (e) => {
+  const transcript = Array.from(e.results)
+    .map(result => result[0])
+    .map(result => result.transcript).join('');
+    console.log(transcript);
+
+    processCommand(transcript);
+};
+
+const processCommand = (transcript) => {
+  if(portraitPositions[transcript]) {
+    changeImgCrop(portraitPositions[transcript])
+  }
+};
+
+
+
+const portraitPositions = {
+  "1": {top: 0, right: 385, bottom: 381, left: 0},
+  "2": {top: 0, right: 827, bottom: 381, left: 385},
+  "3": {top: 382, right: 385, bottom: 762, left: 0},
+  "4": {top: 382, right: 800, bottom: 762, left: 385}
 };
 
 // 1st - rect(0px,385px,385px,0px)
@@ -17,3 +41,7 @@ const positions = {
 const changeImgCrop = function(args = {}) {
   $('#portrait').css('clip', `rect(${args.top}px,${args.right}px,${args.bottom}px,${args.left}px)`);
 };
+
+recognition.addEventListener("result", speechTranscript);
+recognition.addEventListener("end", recognition.start);
+recognition.start();

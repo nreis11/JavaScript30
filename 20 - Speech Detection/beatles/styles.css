@@ -19,11 +19,12 @@ body {
 #main-container {
   width: 1024px;
   height: 768px;
-  border:5px solid blue;
+  /*border:5px solid blue;*/
   position: relative;
   font-size: 0;
   overflow: hidden;
   align-items: center;
+  justify-content: center;
 }
 
 #portrait {
@@ -32,6 +33,6 @@ body {
   display: block;
   margin: auto;
   position: absolute;
-  right: 10%;
-  clip: rect(0px,385px,381px,0px);
+  right: 13%;
+  clip: rect(800px,800px,800px,0px);
 }
