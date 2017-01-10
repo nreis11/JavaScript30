@@ -3,8 +3,8 @@ $(document).ready(function() {
 });
 
 const positions = {
-  "one": {top: 0, right: 385, bottom: 385, left: 0},
-  "two": {top: 0, right: 827, bottom: 385, left: 385},
+  "one": {top: 0, right: 385, bottom: 381, left: 0},
+  "two": {top: 0, right: 827, bottom: 381, left: 385},
   "three": {top: 382, right: 385, bottom: 762, left: 0},
   "four": {top: 382, right: 800, bottom: 762, left: 385}
 };
@@ -14,6 +14,6 @@ const positions = {
 // 3rd - rect(382px,385px,762px,0px)
 // 4th - rect(382px,800px,762px,385px)
 
-const changeImgCrop = function(top, right, bottom, left) {
-  $('#portrait').css('clip', `rect(${top}px,${right}px,${bottom}px,${left}px)`);
+const changeImgCrop = function(args = {}) {
+  $('#portrait').css('clip', `rect(${args.top}px,${args.right}px,${args.bottom}px,${args.left}px)`);
 };

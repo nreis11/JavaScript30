@@ -33,5 +33,5 @@ body {
   margin: auto;
   position: absolute;
   right: 10%;
-  clip: rect(0px,385px,385px,0px);
+  clip: rect(0px,385px,381px,0px);
 }
