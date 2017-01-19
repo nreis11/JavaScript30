@@ -51,8 +51,8 @@
   }
 
   function setVoice() {
-    console.log('changing voice');
-    msg.voice = voices.find(voice => voice.name === this.value);
+    // console.log('changing voice');
+    msg.voice = voices.find(voice => voice.lang.includes('en'));
     toggle();
   }
 
@@ -64,7 +64,7 @@
   }
 
   function setOption() {
-    console.log(this.name);
+    // console.log(this.name);
     msg[this.name] = this.value;
     toggle();
   }
@@ -77,7 +77,8 @@
   // stopButton.addEventListener('click', function() {
   //   toggle(false);
   // });
-  stopButton.addEventListener('click', toggle.bind(null, false));
+  // stopButton.addEventListener('click', toggle.bind(null, false));
+  stopButton.addEventListener('click', () => toggle(false));
 </script>
 
 </body>
