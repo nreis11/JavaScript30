@@ -22,7 +22,7 @@
       <label for="pitch">Pitch:</label>
 
       <input name="pitch" type="range" min="0" max="2" step="0.1">
-      <textarea name="text">Hello! I love JavaScript 👍</textarea>
+      <textarea name="text">The quick brown fox jumped over the lazy dog!💩</textarea>
       <button id="stop">Stop!</button>
       <button id="speak">Speak</button>
 
@@ -43,7 +43,7 @@
     // console.log('voices', voices);
 
     const voiceOptions = voices
-      .filter(voice => voice.lang === "en-US")
+      .filter(voice => voice.lang.includes("en"))
       .map(voice => `<option value="${voice.name}">${voice.name}</option>`)
       .join('');
 
@@ -52,7 +52,7 @@
 
   function setVoice() {
     // console.log('changing voice');
-    msg.voice = voices.find(voice => voice.lang.includes('en'));
+    msg.voice = voices.find(voice => voice.name === this.value);
     toggle();
   }
 
