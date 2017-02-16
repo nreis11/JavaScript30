@@ -1,8 +1,12 @@
 let countdown;
 const timeLeft = document.querySelector(".display__time-left");
 const endTime = document.querySelector(".display__end-time");
+const timerBtns = document.querySelectorAll("[data-time]");
 
 function timer(seconds) {
+  // clear any existing timers
+  clearInterval(countdown);
+
   const now = Date.now();
   const then = now + (seconds * 1000);
   displayTimeLeft(seconds);
@@ -36,3 +40,21 @@ function displayEndTime(timestamp) {
   console.log('minutes', minutes);
   endTime.textContent = `Return at ${adjHour}:${minutes}`;
 }
+
+function startTimer() {
+  const seconds = parseInt(this.dataset.time);
+  timer(seconds);
+}
+
+timerBtns.forEach((btn) => {
+  btn.addEventListener("click", startTimer);
+});
+
+document.customForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const mins = this.minutes.value;
+  this.reset();
+  timer(mins * 60);
+});
+
+
