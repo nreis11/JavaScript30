@@ -62,7 +62,7 @@ slider.addEventListener("mousemove", (e) => {
     if(!isDown) {return;} //stop fn from running
     e.preventDefault();
     const x = e.pageX - slider.offsetLeft;
-    const walk = x - startX;
+    const walk = (x - startX) * 3;
     console.log('walk', walk);
     slider.scrollLeft = scrollLeft - walk;
 });
