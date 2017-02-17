@@ -34,10 +34,15 @@
     </div>
   </div>
 
+  <audio id="punch_fx">
+    <source src="punch.mp3">
+  </audio>
+
 <script>
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  const punchFx = document.querySelector("#punch_fx");
   let lastHole;
   let lastMole;
   let timeUp = false;
@@ -71,6 +76,10 @@
 
   function bonk(e) {
     if(!e.isTrusted) return; //Cheater!
+    if(punchFx.play) {
+      punchFx.currentTime = 0;
+      punchFx.play();
+    }
     this.classList.remove("up");
     updateScore();
   }
