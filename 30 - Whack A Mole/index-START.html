@@ -38,15 +38,16 @@
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  let lastHole;
   let lastMole;
   let timeUp = false;
+  let score = 0;
 
   function randomTime(min, max) {
     return Math.round(Math.random() * (max - min) + min);
   }
 
   function randomHole(holes) {
-    let lastHole;
     const idx = Math.floor(Math.random() * holes.length);
     const hole = holes[idx];
     // Check if repeat hole
@@ -61,7 +62,6 @@
   function peep() {
     const time = randomTime(200, 1000);
     const hole = randomHole(holes);
-    console.log({time, hole});
     hole.classList.add("up");
     setTimeout(() => {
       hole.classList.remove("up");
@@ -69,24 +69,28 @@
     }, time);
   }
 
+  function bonk(e) {
+    if(!e.isTrusted) return; //Cheater!
+    this.classList.remove("up");
+    updateScore();
+  }
+
   function startGame() {
     scoreBoard.textContent = 0;
+    score = 0;
     timeUp = false;
     peep();
     setTimeout(() => timeUp = true, 10000);
   }
 
-  function updateScore(e) {
-    console.log("CLICKED");
-    if(this != lastMole) {
-      scoreBoard.textContent = parseInt(scoreBoard.textContent) + 1;
-    }
-    lastMole = this;
+  function updateScore() {
+    score++;
+    scoreBoard.textContent = score;
   }
 
 
 moles.forEach((mole) => {
-  mole.addEventListener("click", updateScore);
+  mole.addEventListener("click", bonk);
 });
 
 </script>
