@@ -8,10 +8,15 @@
 
   <header>
     <h1>Title</h1>
+    <img id="train" src="images/blue-train.png" alt="">
   </header>
 
   <div class="words" contenteditable>
   </div>
+
+  <audio id="whistle">
+    <source src="sounds/whistle.mp3" type="audio/mp3">
+  </audio>
 
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -24,6 +29,7 @@ let p = document.createElement('p');
 const words = document.querySelector(".words");
 const myTitle = document.querySelector('h1');
 const body = document.querySelector("body");
+const whistle = document.querySelector("#whistle");
 words.appendChild(p);
 
 recognition.addEventListener("result", e => {
@@ -54,6 +60,11 @@ recognition.addEventListener("result", e => {
     if(transcript.includes("background color to")) {
       answer = parseCommand("background color to", transcript);
       changeBackground(answer);
+    }
+
+    if(transcript.includes("all aboard")) {
+      moveTrain();
+      whistle.play();
     }
 });
 
@@ -86,6 +97,14 @@ const changeBackground = function(color) {
   color = color.replace(/\s+/g, '');
   body.style.background = color;
 };
+
+const moveTrain = function() {
+  train = document.querySelector("#train");
+  train.style.animation = "move 6s linear forwards";
+  train.addEventListener("animationend", function() {
+    train.style.animation = "";
+  });
+}
 
 recognition.addEventListener("end", recognition.start);
 recognition.start();
@@ -143,6 +162,25 @@ recognition.start();
       border: 1px solid;
       border-color: transparent #efe4e4;
     }
+
+    #train {
+      /*display: none;*/
+      position: absolute;
+      left: -55%;
+      transform: scale(.8);
+    }
+
+    @keyframes move
+      {
+        0%
+        {
+          left: -55%;
+        }
+        100%
+        {
+          left: 100%;
+        }
+      }
   </style>
 
 </body>
